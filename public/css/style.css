@@ -1,0 +1,278 @@
+@font-face {
+    font-family: 'marloweCoctail';
+    src: url(/font/marlowe_coctail.woff);
+}
+@font-face {
+    font-family: 'marlowe';
+    src: url(/font/marlowe.woff);
+}
+.makerslog-titile{
+	/*font-family: "marloweCoctail";*/
+	font-family: "marlowe";
+	font-size: 5rem;
+}
+.pad-lr-10{
+    padding-left: 10px;
+    padding-right:10px;
+}
+.pad-lr-15{
+    padding-left: 15px;
+    padding-right:15px;
+}
+.pad-lr-20{
+    padding-left: 20px;
+    padding-right:20px;
+}
+.pad-tb-10{
+    padding-top: 10px;
+    padding-bottom:10px;
+}
+.nav-item > .active {
+        background-color: rgba(255,255,255,.2);
+        border-bottom: 10px;
+}
+@media (min-width: 62em){            
+    
+	.scrollmenu {
+        margin-right: 56px;
+        margin-left: 56px;
+	
+	}
+    .classic-tabs li:last-child {
+        margin-right: 56px;
+    }
+}
+.med-btn-fonts {
+    font-size:1rem!important;
+}
+.rounded-circle-imp{
+    border-radius: 50%!important;
+}
+
+.testimonial-card .avatar,.testimonial-card .card-up{
+		overflow:hidden;
+		height:120px;
+	}
+.testimonial-card .avatar{
+	border-radius:50%;
+	width:120px;margin:-65px auto 0;
+	border:5px solid #fff;background:#FFF
+	}
+.testimonial-card .avatar img{
+	width:100%
+	}
+.testimonial-card .card-block,.testimonial-carousel{
+		text-align:center
+	}
+.check-list{
+	max-height: 280px;
+	overflow-y:scroll;
+}
+
+.new-scroll::-webkit-scrollbar
+{
+	width: 10px;
+	height: 10px;
+	background-color: #F5F5F5;
+	border: none;
+
+}
+.new-scroll::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3);
+	border-radius: 8px;
+	border: none;
+	background-color: #F5F5F5;
+}
+.new-scroll::-webkit-scrollbar-thumb
+{
+	border-radius: 8px;
+	-webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.3);
+	background-color: #CCC;
+}
+[v-cloak]{
+  display: none!important;
+}
+.scrollmenu {
+    overflow: auto;
+    white-space: nowrap;
+    overflow-y: hidden;
+}
+
+.scrollmenu fieldset {
+    display: inline-block;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    padding-right: 20px;
+}
+
+.fx-action-btn {
+    position: fixed;
+    right: 23px;
+    bottom: 23px;
+    padding-top: 15px;
+    margin-bottom: 0;
+    z-index: 998;
+}
+.media .mb-1{
+	height: 280px;
+}
+
+@media (min-width: 768px) {
+    .container-blog{
+	  	margin-right: 10%;
+	  	margin-left: 10%;
+	}
+}
+@media (max-width: 768px) {
+    .container-blog{
+	  	margin-right: 2%;
+	  	margin-left: 2%;
+	}
+}
+
+.text-overflow-ellipsis{
+	overflow-x: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+
+/* task.blade.php */
+.tasks_open {
+    height: 390px;
+    overflow-y: auto;
+}
+
+.tasks {
+    height: 460px;
+    overflow-y: auto;
+}
+
+.task_card {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.task_card .card-data ul li i {
+	cursor: pointer;
+}
+
+.time_right {
+	float: right;
+}
+
+.task_btn.btn-flat {
+	margin: 0;
+	padding: 0;
+	color: #F5F5F5;
+}
+
+/* task.blade.php */
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0
+}
+
+.p-card{
+	width: 192.34px!important;
+	height: 186.25px!important;
+	padding: 0px!important;
+	margin: 10px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+}
+.p-card-title{
+	padding: 5px;
+	line-height: 2;
+}
+
+.page-footer{
+	z-index: -1!important;
+}
+
+.hideOnDesktop {
+	display: none;
+}
+
+.hideOnMobile {
+	display: block;
+}
+
+.contributor-card {
+	padding-bottom: 15px;
+	padding-top: 15px;
+}
+
+.filename {
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 500px;
+}
+
+.githubProfileCard.card {
+	box-shadow: none;
+}
+
+.github.avatar {
+	width: 90px;
+	height: 90px;
+	margin-top: 20px;
+}
+
+.githubProfile {
+	padding-right: 0;
+}
+
+.githubGraph {
+	padding-left: 0;
+}
+
+.githubGoogleChart {
+	padding-top: 15px;
+	padding-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+	.hidden-sn main {
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	.container-fluid {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	.hideOnDesktop {
+		display: block;
+	}
+	.hideOnMobile {
+		display: none;
+	}
+	.btn-floating.btn-large {
+		width: 37px;
+		height: 37px;
+    	line-height: 37px;
+    }
+	.btn-floating.btn-large i {
+    	line-height: 37px;
+    }
+    .filename {
+    	white-space: initial;
+    	max-width: 120px;
+    }
+    .githubCard {
+    	margin-left: 0;
+    	margin-right: 0;
+    }
+    .githubProfile {
+		padding-left: 0;
+	}
+	.githubGraph {
+		padding-right: 0px;
+	}
+}
