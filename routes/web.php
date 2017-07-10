@@ -43,12 +43,7 @@ Route::group(['prefix' => 'api','namespace'=>'api'], function () {
     Route::post('category','CategoryController@index');
     Route::post('category/add','CategoryController@create');
     Route::post('logs/{gusermail}','LogsController@index');
-	  Route::post('/{gusermail}/tasks/show', 'TasksController@showTasks');
-	  Route::post('/{gusermail}/tasks/add', 'TasksController@create');
-    Route::post('/{gusermail}/tasks/delete', 'TasksController@delete');
-    Route::post('/{gusermail}/tasks/open', 'TasksController@openUpdate');
-	  Route::post('/{gusermail}/tasks/help', 'TasksController@helpUpdate');
-	  Route::post('/{gusermail}/tasks/closed', 'TasksController@closedUpdate');
+
 });
 
 // ---------------------------------------------------
@@ -61,3 +56,7 @@ Route::post('/{gusermail}/profile', 'ProfileController@store')->name('postProfil
 Route::get('/{gusermail}/documents', 'DocumentController@documents')->name('documents');
 Route::get('/{gusermail}/documents/view/{googledrive_id}', 'DocumentController@documentView')->name('documentView');
 Route::get('/{gusermail}/documents/download/{document_id}', 'DocumentController@documentDownload')->name('documentDownload');
+
+Route::get('/{gusermail}/video', 'VideoController@video')->name('video');
+
+Route::get('/{gusermail}/{pid}/{slug}', 'PostController@individual')->name('individial');

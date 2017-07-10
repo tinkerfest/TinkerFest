@@ -117,6 +117,32 @@
                             </div>
                             <div class="msg"></div>
                         </div>
+
+                        <button id="uploadVideoPopUpBtn" class="btn btn-success waves-effect waves-light"><i class="fa fa-plus"></i>&nbsp; Add Video</button>
+                        <ul id="files" class="list-group">
+                            @foreach ($video as $v)
+                                <li class='list-group-item justify-content-between videos' data-id="{{ $v->video_id }}" data-name="{{ $v->video_name }}">
+                                    <span class='filename'>{{ $v->video_name }}</span>
+                                    <a class='deleteVideo' data-id="{{ $v->video_id }}" data-name="{{ $v->video_name }}" onClick='deleteVideo(this)'>
+                                        <span class='deleteVideo badge badge-primary badge-pill'>
+                                            <i class='fa fa-close' style='color:#f5f5f5'></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                        <br>
+                        <form id="uploadVideo" method="post" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <input type="file" id="video" style="display: none;" name="video"> 
+                        </form>
+                        <div class="form-group">
+                            <div class="progress" style="height: 16px;">
+                                <div class="progress-bar progress-bar-success my_video_progress" role="progressbar" style="display: none; width:0%; height: 16px;">0%</div>
+                            </div>
+                            <div class="video_msg"></div>
+                        </div>
+
                         <div class="hideOnDesktop">
                                <button type="submit" class="btn green offset-md-1" :disabled="pushing" v-on:click="publish">@{{ pushing ? 'Publishing' : 'Publish'}} </button>
                         </div>
@@ -205,6 +231,92 @@
                 },
                 error: function (response) {
                     $('#msg').html(response); // display error response from the PHP script
+                }
+            });
+            return false;
+        }
+
+        $(document).ready(function(){
+            $("#uploadVideoPopUpBtn").click(function(){
+                $("#video").click();
+            });
+        });
+
+        $(document).ready(function() {
+            $('#video').change(function () {
+                $('#uploadVideo').submit();
+                $('#uploadVideoPopUpBtn').attr('disabled', 'disabled');
+                $('.video_msg').text('Uploading in progress...');
+            });
+
+            $('#uploadVideo').on('submit', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "{{ route('uploadVideo') }}",
+                    dataType: 'text',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: new FormData(this),
+                    type: 'post',
+                    xhr: function () {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", function (evt) {
+                            if (evt.lengthComputable) {
+                                  var percentComplete = evt.loaded / evt.total;
+                                percentComplete = parseInt(percentComplete * 70);
+                                    $('.my_video_progress').css('display', 'block');
+                                if( percentComplete == 70 ){
+                                    updateRandom( percentComplete );
+                                }else{
+                                    $('.my_video_progress').css('width', (percentComplete) + '%');
+                                    $('.my_video_progress').text(percentComplete + '%');
+                                }
+                            }
+                        }, false);
+                        return xhr;
+                    },
+                    success: function (response) {
+                        _G.video_success = true;
+                        $('#video').val('');
+                        // $("#myModal").modal('hide');
+                        var data = JSON.parse(response);
+                        $.each(data, function (index) {
+                            var url = "/video/delete/" + data[index].video_id;
+                            $('#videos').append("<li class='list-group-item justify-content-between videos' data-id='" + data[index].video_id + "'data-name='" + data[index].video_name + "'><span class='filename'>" 
+                                                + data[index].video_name + 
+                                                "</span><a class='deleteDoc' data-id='" + data[index].video_id + "'data-name='" + data[index].video_name + "' onClick='deleteVideo(this)'><span class='deleteVideo badge badge-primary badge-pill'><i class='fa fa-close' style='color:#f5f5f5'></i></span></a></li>");
+                        });
+                        $('.my_video_progress').css('display', 'none');
+                        $('.my_video_progress').css('width', '0%');
+                        $('.video_msg').text('');
+                        $('#uploadVideoPopUpBtn').removeAttr('disabled');
+                    },
+                    error: function (response) {
+                        // $('#msg').html(response);
+                    }
+                   
+                });
+                return false;
+            });
+        });
+
+        function deleteVideo(obj) {
+            var video_id = obj.getAttribute('data-id'),
+                video_name = obj.getAttribute('data-name');
+            $.ajax({
+                url: "../video/delete/"+video_id,
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: video_id,
+                type: 'post',
+                success: function (response) {
+                    $('[data-id=' + video_id + ']').parent().remove();
+                },
+                error: function (response) {
+                    // $('#msg').html(response);
                 }
             });
             return false;
@@ -393,6 +505,12 @@
 
                     /* End - Attachments */
 
+                    var video = [];
+
+                    $('li.videos').each(function(index){
+                        video.push($(this).attr('data-id'));
+                    });
+
                     axios.post('/api/log/update', {
                                     p_id: "{!! $p->p_id!!}",
                                     p_title: self.logcontent.title ,
@@ -400,6 +518,7 @@
                                     p_content: self.logcontent.content,
                                     categories: categoriesToPush,
                                     documents: doc,
+                                    video: video,
                             }).then(function (response) {
                                 // pushing = false;
                                 console.log(response.data);

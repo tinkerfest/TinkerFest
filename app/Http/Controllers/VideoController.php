@@ -23,57 +23,22 @@ use Google_Http_MediaFileUpload;
 
 class VideoController extends Controller
 {
-   //  public function videos($gusermail) {
-   //      if(Auth::check() &&  Auth::user()->g_username == $gusermail ) {
-   //      	$provider_id = User::Select('provider_id')
-   //      							->Where('g_username', $gusermail)
-   //      							->first()->toArray();
-			// $videos = video::Select('*')
-			// 						->Where('provider_id', $provider_id['provider_id'])
-			// 						->get();
-   //          return view('videos')
-   //          		->with('videos', $videos)
-   //          		->with('meta',Meta::get());
-   //      }
-   //      else {
-   //          return redirect(route('gusermail', ['gusermail' => $gusermail]));
-   //      }
-   //  }
-
-   //  public function videoDownload($gusermail, $video_id) {
-        
-   //          $provider_id = User::Select('provider_id')
-   //                                  ->Where('g_username', $gusermail)
-   //                                  ->first()->toArray();
-   //          $video = video::Select('*')
-   //                                          ->Where('provider_id', $provider_id['provider_id'])
-   //                                          ->Where('video_id', $video_id)
-   //                                          ->first()->toArray();
-   //          $headers = array(
-   //              'Content-Type' => 'application/octet-stream',
-   //          );
-
-   //          $public_dir = public_path();
-   //          $fileName = $video['video_name'];
-   //          $filetopath= $public_dir.'/videos/'.$fileName;
-
-   //          if(file_exists($filetopath)){
-   //              return response()->download($filetopath,$fileName,$headers);
-   //          }   
-   //  }
-
-   //  public function videoView($gusermail, $googledrive_id) {
-   //      	$provider_id = User::Select('provider_id')
-   //      							->Where('g_username', $gusermail)
-   //      							->first()->toArray();
-			// $video = video::Select('*')
-			// 								->Where('provider_id', $provider_id['provider_id'])
-			// 								->Where('googledrive_id', $googledrive_id)
-			// 								->first()->toArray();
-   //          return view('video_view')
-   //          		->with('video', $video)
-   //          		->with('meta',Meta::get());	
-   //  }
+    public function video($gusermail) {
+        if(Auth::check() &&  Auth::user()->g_username == $gusermail ) {
+        	$provider_id = User::Select('provider_id')
+        							->Where('g_username', $gusermail)
+        							->first()->toArray();
+			$videos = Video::Select('*')
+									->Where('provider_id', $provider_id['provider_id'])
+									->get();
+            return view('video_view')
+            		->with('videos', $videos)
+            		->with('meta',Meta::get());
+        }
+        else {
+            return redirect(route('gusermail', ['gusermail' => $gusermail]));
+        }
+    }
 
     public function uploadVideo(Request $request) {
 
@@ -168,9 +133,21 @@ class VideoController extends Controller
 
     public function deleteVideo(Request $request, $video_id)
     {
-        $video_name = video::Select('video_name')->Where('video_id', $video_id)->first();
+        $video_name = Video::Select('video_name')->Where('video_id', $video_id)->first();
         File::delete(public_path().'/videos/'.$video_name['video_name']);
-        video::Where('video_id', $video_id)->delete();
+        Video::Where('video_id', $video_id)->delete();
+
+        // $client = new Google_Client();
+        // $client->setAuthConfigFile(__DIR__ . '/video.json');
+        // $client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . '/oauth2callback');
+        // $client->setScopes('https://www.googleapis.com/auth/youtube');
+        // $client->setAccessType('offline');
+        // $refreshToken = env('YOUTUBE_REFRESH_TOKEN');
+        // $client->fetchAccessTokenWithRefreshToken($refreshToken);
+        // $client->getAccessToken();
+        // $youtube = new Google_Service_YouTube($client);
+        // $youtube->videos->delete($video_id);
+
         return response()->json($video_id);
     }
 

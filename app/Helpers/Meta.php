@@ -34,55 +34,60 @@ class Meta
             // dd($route);
             switch ($route) {
                 case 'indexroot':
-                    $meta['title'] = "MakersLog | Light on what Makers Make";
+                    $meta['title'] = "TinkerFest | Light on what Makers Make";
                     $meta['pageName'] = "Search";
                     break;
                 
                 case 'createLog':
-                    $meta['title'] = "New Log | MakersLog";
+                    $meta['title'] = "New Log | TinkerFest";
                     $meta['pageName'] = $AuthUser->first_name." ".$AuthUser->last_name." / New Log";
                     break;
 
                 case 'editLog':
-                    $meta['title'] = "Edit Log | MakersLog";
+                    $meta['title'] = "Edit Log | TinkerFest";
                     $meta['pageName'] = $AuthUser->first_name." ".$AuthUser->last_name." / Edit Log ";
                     break;
 
                 case 'login':
-                    $meta['title'] = "Login | MakersLog";
+                    $meta['title'] = "Login | TinkerFest";
                     break;
 
                 case 'gusermail':
                     $user = User::where('g_username', Request::route('gusermail'))->first();
 
-                    $meta['title'] = "Logs from ".$user->first_name." ".$user->last_name." | MakersLog";
+                    $meta['title'] = "Logs from ".$user->first_name." ".$user->last_name." | TinkerFest";
                     $meta['pageName'] = $user->first_name." ".$user->last_name;
                     break;
 
                 case 'getProfile':
-                    $meta['title'] = "Edit Profile | MakersLog";
+                    $meta['title'] = "Edit Profile | TinkerFest";
                     $meta['pageName'] = $AuthUser->first_name." ".$AuthUser->last_name." / Edit Profile";
                     break;
 
                 case 'documents':
-                    $meta['title'] = "Documents | MakersLog";
+                    $meta['title'] = "Documents | TinkerFest";
                     $meta['pageName'] = $AuthUser->first_name." ".$AuthUser->last_name." / Documents";
                     break;
 
                 case 'documentView':
                     $d = Document::where('googledrive_id', Request::route('googledrive_id'))->first();
-                    $meta['title'] = "Document of ".$d['document_name']." | MakersLog";
+                    $meta['title'] = "Document of ".$d['document_name']." | TinkerFest";
                     $meta['pageName'] = "Document View";
                     $meta['gusermail'] = Request::route('gusermail');
                     break;
-                    
+                
+                case 'video':
+                    $meta['title'] = "Video | TinkerFest";
+                    $meta['pageName'] = $AuthUser->first_name." ".$AuthUser->last_name." / Video";
+                    break;
+
                 case 'individial':
                     $meta['pageName'] = str_replace("-", " ", Request::route('slug') );
-                    $meta['title'] = $meta['pageName']. " | MakersLog";
+                    $meta['title'] = $meta['pageName']. " | TinkerFest";
                     break;
 
                 case 'contributors':
-                    $meta['title'] = "Contributors | MakersLog";
+                    $meta['title'] = "Contributors | TinkerFest";
                     $meta['pageName'] = "Contributors";
                     break;
                                         

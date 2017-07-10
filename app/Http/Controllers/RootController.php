@@ -46,8 +46,7 @@ class RootController extends Controller
 	public function showPost($id)
 	{
 		$post=Post::where('p_id',$id)->where('is_latest','1')->where('delete','0')->first();
-		$user=User::where('provider_id',$post->provider_id)->first();
-		
+		$user=User::where('provider_id',$post->provider_id)->first();	
 		return redirect('/'.$user->g_username.'/'.$id.'/'.$post->uri);
 	}
 	public function reportbug(Request $r)

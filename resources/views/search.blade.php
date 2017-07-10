@@ -24,12 +24,12 @@
             <div class="tabs-wrapper"> 
                 <ul class="nav classic-tabs indigo tabs-2" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link waves-light active" id="fellowMakers" data-toggle="tab" href="#panel51" role="tab">
+                        <a class="nav-link waves-light" id="fellowMakers" data-toggle="tab" href="#panel51" role="tab">
                         <i class="fa fa-coffee pad-lr-10"></i>
-                        Fellow Makers</a>
+                        Fellow Tinkers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link waves-light" id="recentLogs" data-toggle="tab" href="#panel52" role="tab">
+                        <a class="nav-link waves-light active" id="recentLogs" data-toggle="tab" href="#panel52" role="tab">
                         <i class="fa fa-list-ul pad-lr-10"></i>
                         Recent Logs</a>
                     </li>
@@ -40,7 +40,7 @@
             <div class="tab-content card">
 
                 <!--Panel 1-->
-                <div class="tab-pane fade in show active" id="panel51" role="tabpanel">
+                <div class="tab-pane fade" id="panel51" role="tabpanel">
                     <div class="md-form col-md-8 offset-md-2 ">
                         <input type="search" id="form-autocomplete-f" class="form-control" placeholder="Search Fellow Makers of TT17 " v-model="text" v-on:keyup="typed">
                     </div>
@@ -78,12 +78,12 @@
                 <!--/.Panel 1-->
 
                 <!--Panel 2-->
-                <div class="tab-pane fade " id="panel52" role="tabpanel">
+                <div class="tab-pane fade in show active" id="panel52" role="tabpanel">
                     <div class="md-form col-md-8 offset-md-2 ">
                         <input type="search" id="form-autocomplete-b" class="form-control" placeholder="Search from what Makers think of"  v-model="text" v-on:keyup="typed">
                     </div>
                     <form class="scrollmenu new-scroll">
-                            <fieldset class="form-group" v-for="(c, index) in categories">
+                            <fieldset class="form-group" v-cloak v-for="(c, index) in categories">
                                 <input type="checkbox" class="filled-in" v-on:click="searchOnCheck" v-model="c.checked" v-bind:id="'chk' + index.toString()">
                                 <label v-bind:for="'chk' + index.toString()" >@{{ c.c_name }}</label>
                             </fieldset>
@@ -95,7 +95,7 @@
                             <div class="alert blue-text text-center" >Result Not Found</div>
                         </div>
                         <div class="col-md-12 pad-lr-10 pad-tb-10" 
-                            v-for="p in logsCollection">
+                            v-for="p in logsCollection" v-cloak>
                             <div class="media mb-1">
                                 <div class="hideOnMobile">
                                     <a target="_blank" :href="makeUrl(p.g_username)" class="media-left waves-light">

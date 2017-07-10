@@ -17,6 +17,7 @@
                     <li><a href="{{ route('gusermail', ['gusermail' => $meta['gusermail']] ) }}" class="waves-effect">My Logs</a></li>
                     <li><a href="{{ route('getProfile', ['gusermail' => $meta['gusermail']] ) }}" class="waves-effect">Edit Account</a></li>
                     <li><a href="{{ route('documents', ['gusermail' => $meta['gusermail']] ) }}" class="waves-effect">Attachments</a></li>
+                    <li><a href="{{ route('video', ['gusermail' => $meta['gusermail']] ) }}" class="waves-effect">Video</a></li>
                 </ul>
             </li>
             <!--/. Side navigation links -->

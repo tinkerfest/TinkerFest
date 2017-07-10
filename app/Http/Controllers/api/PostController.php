@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\CategoryMap;
 use App\Document;
+use App\Video;
 use Auth;
 use Uuid;
 
@@ -57,6 +58,10 @@ class PostController extends Controller
                 Document::Where('document_id', $doc)->update(['p_id' => $input['p_id']]);   
             }
 
+            foreach ($r->video as $v) {
+                Video::Where('video_id', $v)->update(['p_id' => $input['p_id']]);   
+            }
+
             return (['status' => '1']);
 
         } catch (Exception $e) {
@@ -103,6 +108,10 @@ class PostController extends Controller
 
             foreach ($r->documents as $doc) {
                 Document::Where('document_id', $doc)->update(['p_id' => $input['p_id']]);   
+            }
+
+            foreach ($r->video as $v) {
+                Video::Where('video_id', $v)->update(['p_id' => $input['p_id']]);   
             }
 
             return (['status' => '1']);

@@ -97,10 +97,6 @@
                         <ul id="files" class="list-group">
                         </ul>
                         <br>
-                        <button id="uploadVideoPopUpBtn" class="btn btn-success waves-effect waves-light"><i class="fa fa-plus"></i>&nbsp; Add Video</button>
-                        <ul id="videos" class="list-group">
-                        </ul>
-                        <br>
                         <form id="uploadDocuments" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <input type="file" id="multiFiles" style="display: none;" name="documents[]" multiple> 
@@ -111,7 +107,10 @@
                             </div>
                             <div class="msg"></div>
                         </div>
-
+                        <button id="uploadVideoPopUpBtn" class="btn btn-success waves-effect waves-light"><i class="fa fa-plus"></i>&nbsp; Add Video</button>
+                        <ul id="videos" class="list-group">
+                        </ul>
+                        <br>
                         <form id="uploadVideo" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <input type="file" id="video" style="display: none;" name="video"> 
@@ -499,13 +498,22 @@
 
                     /* End - Attachments */
 
+
+                    var video = [];
+
+                    $('li.videos').each(function(index){
+                        video.push($(this).attr('data-id'));
+                    });
+
+                    
+
                     axios.post('/api/log/publish', {
                                     p_title: self.logcontent.title ,
                                     p_short_desc: self.logcontent.desc,
                                     p_content: self.logcontent.content,
                                     categories: categoriesToPush,
                                     documents: doc,
-
+                                    video: video,
                             }).then(function (response) {
                                 pushing = false;
                                 self.justShow();
