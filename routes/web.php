@@ -10,11 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function() {
+  return view('tinkerfest');
+});
+Route::get('/delhi', function() {
+  return view('delhi_register');
+});
 
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('root/initial', 'PostController@validateInitial');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
-Route::get('/', 'RootController@index')->name('indexroot');
+Route::get('/blog', 'RootController@index')->name('indexroot');
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'Auth\LoginController@login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
